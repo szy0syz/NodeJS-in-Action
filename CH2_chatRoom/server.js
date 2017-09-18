@@ -14,14 +14,14 @@ function send404(res) {
 
 // 辅助函数：提供文件数据服务
 function sendFile(res, filePath, fileContents) {
-  res.writeHead(200, { 'Content-Type': mime.lookup(path.basename(filePath)) });
+  res.writeHead(200, { 'Content-Type': mime.getType(path.basename(filePath)) });
   res.end(fileContents);
 }
 
 // 提供静态文件服务
 function serveStatic(res, cache, absPath) {
   if (cache[absPath]) {
-    sendFile(res, absPath, cache(absPath));
+    sendFile(res, absPath, cache[absPath]);
   } else {
     fs.exists(absPath, function (exists) {
       if (exists) {
