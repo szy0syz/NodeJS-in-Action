@@ -2,7 +2,7 @@ var socketio = require('socket.io');
 var io;
 var guestNumber = 1;
 var nickNames = {};
-var namesUsed = {};
+var namesUsed = [];
 var currentRoom = {};
 
 exports.listen = function (server) {
@@ -10,10 +10,11 @@ exports.listen = function (server) {
   io = socketio.listen(server);
   //console.log(io);
   // io.set()方法已经被替换为use()方法
-  //io.use('log level', 1);
+  //io.set('log level', 1);
 
   // 定义每个用户连接上来时的逻辑层
   io.sockets.on('connection', function (socket) {
+    console.log('assignGuestName');
     // 分配个随机访客名
     guestNumber = assignGuestName(socket, guestNumber, nickNames, namesUsed);
     // 在用户连接上来时把它放入聊天室Lobby中
@@ -51,7 +52,7 @@ function joinRoom(socket, room) {
   socket.broadcast.to(room).emit('message', { text: nickNames[socket.id] + ' has joined ' + room + '.' });
 
   // 用api获取所有在该聊天室的用户 对象数组
-  var usersInRoom = io.sockets.clients(rooms);
+  var usersInRoom = io.sockets.clients(room);
   if (usersInRoom.length > 1) { // 如果用户数大于1就循环拼接
     // 初始化给所有客户端拼接的字符串
     var usersInRoomSummary = 'Users currently in ' + room + ' : ';
