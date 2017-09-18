@@ -11,3 +11,5 @@
   - 用客户端JavaScript做程序的UI
 
 > 其实原来在用原生Node里的TCP做过demo，这次看这本书后用Socket.IO做，可能程序上会更深入一点。
+
+![i1](http://ofx24fene.bkt.clouddn.com//img/2017/chatroom.png)
