@@ -107,7 +107,7 @@ function handleNameChageAttempts(socket, nickNames, namesUsed) {
 
 // 处理聊天室的创建和变更(加入)
 function handleRoomJoining(socket) {
-  socket.on('join', function(room) {
+  socket.on('join', function (room) {
     socket.leave(currentRoom(socket.id));
     joinRoom(socket, room.newRoom);
   });
@@ -115,7 +115,7 @@ function handleRoomJoining(socket) {
 
 // 定义用户断开连接后的清除逻辑
 function handleClientDisconnection(socket, nickNames, namesUsed) {
-  socket.on('disconnect', function() {
+  socket.on('disconnect', function () {
     var nameIndex = namesUsed.indexOf(nickNames[socket.id]);
     delete namesUsed[nameIndex];
     delete nickNames[socket.io];
