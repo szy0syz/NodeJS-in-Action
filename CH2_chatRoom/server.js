@@ -61,3 +61,9 @@ server.listen(3000, function() {
 });
 
 // node server.js
+
+/////////////////////
+
+// 创建聊天服务端
+var socketio = require('./lib/chat_server');
+chatServer.listen(server);
