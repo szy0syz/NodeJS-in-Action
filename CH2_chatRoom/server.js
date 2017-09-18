@@ -65,5 +65,5 @@ server.listen(3000, function() {
 /////////////////////
 
 // 创建聊天服务端
-var socketio = require('./lib/chat_server');
+var chatServer = require('./lib/chat_server');
 chatServer.listen(server);
